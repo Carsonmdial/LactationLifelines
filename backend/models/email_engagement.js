@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
           key: 'subscriber_id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
       },
       email_subject: {
         type: DataTypes.STRING,
