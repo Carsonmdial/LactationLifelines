@@ -1,6 +1,6 @@
 const db = require('../server'); // Adjust path as needed
 const MailChimp = require('mailchimp-api-v3');
-const mailchimp = new MailChimp('your_mailchimp_api_key');
+const mailchimp = new MailChimp('dec8bb9967c69a8de3f5ec626bbd1da2-us17');
 
 exports.addSubscriber = async (req, res) => {
     try {

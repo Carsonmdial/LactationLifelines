@@ -8,10 +8,10 @@ const port = process.env.PORT || 3001;
 
 // Middleware
 const auth = require('./middleware/auth');
-//const errorHandler = require('./middleware/errorHandler');
-//const logger = require('./middleware/logger');
-//const { body } = require('express-validator');
-//const validateRequest = require('./middleware/validateRequest');
+const errorHandler = require('./middleware/errorHandler');
+const logger = require('./middleware/logger');
+const { body } = require('express-validator');
+const validateRequest = require('./middleware/validateRequest');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 });
 
 // Error handling middleware should be the last middleware
-app.use(errorHandler);
+//app.use(errorHandler);
 
 // Sync database and start server
 db.sequelize.sync().then(() => {
