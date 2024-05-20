@@ -1,3 +1,13 @@
+require('dotenv').config();  // Load environment variables
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
+console.log('DB_DIALECT:', process.env.DB_DIALECT);
+
+if (!process.env.DATABASE_URL) {
+    console.error('DATABASE_URL is not set!');
+    process.exit(1);  // Exit the application with an error code
+  }
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -16,7 +26,7 @@ const validateRequest = require('./middleware/validateRequest');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(logger);
+app.use(logger);
 
 // Import routes
 const resourceRoutes = require('./routes/resources');
@@ -39,7 +49,7 @@ app.get('/', (req, res) => {
 });
 
 // Error handling middleware should be the last middleware
-//app.use(errorHandler);
+app.use(errorHandler);
 
 // Sync database and start server
 db.sequelize.sync().then(() => {
@@ -47,4 +57,3 @@ db.sequelize.sync().then(() => {
         console.log(`Server running on port ${port}`);
     });
 });
-

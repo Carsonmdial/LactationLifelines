@@ -1,9 +1,15 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const config = require('../config.json')['development'];
+require('dotenv').config();  // Load environment variables
 
-const sequelize = new Sequelize(config.database, config.username, config.password, {
-  host: config.host,
-  dialect: config.dialect,
+const databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL is not set in .env file');
+}
+
+console.log('Connecting to database:', databaseUrl);  // Add this line to debug
+
+const sequelize = new Sequelize(databaseUrl, {
+  dialect: process.env.DB_DIALECT || 'postgres',
 });
 
 const db = {};

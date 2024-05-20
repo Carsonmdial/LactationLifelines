@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       total_subscription_time: {
         type: DataTypes.STRING,  // Storing as ISO 8601 duration string
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'P0D',  // ISO 8601 duration format for 0 days
       },
       active: {
