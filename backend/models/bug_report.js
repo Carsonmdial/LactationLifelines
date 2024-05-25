@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const BugReport = sequelize.define('BugReport', {
+    const bug_report = sequelize.define('bug_report', {
       bug_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -40,8 +40,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return BugReport;
+    return bug_report;
   };
   

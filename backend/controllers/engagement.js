@@ -3,7 +3,7 @@ const db = require('../server'); // Adjust path as needed
 exports.getEngagement = async (req, res) => {
     try {
         // Average Session Duration
-        const sessions = await db.Session.findAll();
+        const sessions = await db.session.findAll();
         const sessionDurations = sessions.map(session => {
             const startTime = new Date(session.start_time);
             const endTime = new Date(session.end_time);
@@ -12,15 +12,15 @@ exports.getEngagement = async (req, res) => {
         const averageSessionDuration = sessionDurations.reduce((a, b) => a + b, 0) / sessionDurations.length;
 
         // Pages per Session
-        const totalPageViews = await db.PageView.count();
-        const totalSessions = await db.Session.count();
+        const totalPageViews = await db.page_view.count();
+        const totalSessions = await db.session.count();
         const pagesPerSession = totalPageViews / totalSessions;
 
         // Bounce Rate
-        const singlePageSessions = await db.Session.findAll({
+        const singlePageSessions = await db.session.findAll({
             include: [{
-                model: db.PageView,
-                where: { session_id: db.Sequelize.col('Session.session_id') },
+                model: db.page_view,
+                where: { session_id: db.Sequelize.col('session.session_id') },
                 required: true,
                 attributes: [],
                 having: db.Sequelize.literal('COUNT(*) = 1')
@@ -29,7 +29,7 @@ exports.getEngagement = async (req, res) => {
         const bounceRate = singlePageSessions.length / totalSessions;
 
         // Exit Rate
-        const pageViews = await db.PageView.findAll();
+        const pageViews = await db.page_view.findAll();
         const exitCounts = {};
         pageViews.forEach(view => {
             if (!exitCounts[view.page_url]) {
@@ -49,8 +49,8 @@ exports.getEngagement = async (req, res) => {
         }
 
         // Clicks and Scroll Depth
-        const totalClicks = await db.ClickEvent.count();
-        const averageScrollDepth = await db.PageView.findAll({
+        const totalClicks = await db.click_event.count();
+        const averageScrollDepth = await db.page_view.findAll({
             attributes: [[db.Sequelize.fn('AVG', db.Sequelize.col('scroll_depth')), 'average_scroll_depth']]
         });
 
@@ -60,10 +60,10 @@ exports.getEngagement = async (req, res) => {
         const returningUsers = sessions.length - uniqueUsers.size;
 
         // New User Sessions
-        const newUserSessions = await db.Session.count({ where: { is_new_user: true } });
+        const newUserSessions = await db.session.count({ where: { is_new_user: true } });
 
         // New Contacts & Subscribers
-        const newSubscribers = await db.Subscriber.count();
+        const newSubscribers = await db.subscriber.count();
 
         res.status(200).json({
             averageSessionDuration,

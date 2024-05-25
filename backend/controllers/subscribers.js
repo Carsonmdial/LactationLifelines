@@ -39,7 +39,7 @@ exports.addSubscriber = async (req, res) => {
         console.log('Mailchimp Response:', mailchimpResponse);
 
         // Add to database
-        const [subscriber, created] = await db.Subscriber.findOrCreate({
+        const [subscriber, created] = await db.subscriber.findOrCreate({
             where: { email },
             defaults: {
                 email,
@@ -60,7 +60,7 @@ exports.addSubscriber = async (req, res) => {
         }
 
         // Add to subscription history
-        await db.SubscriptionHistory.create({
+        await db.subscription_history.create({
             subscriber_id: subscriber.subscriber_id,
             subscribed_at: new Date()
         });
@@ -75,7 +75,7 @@ exports.addSubscriber = async (req, res) => {
 exports.updateSubscriberStatus = async (req, res) => {
     try {
         const { email, active } = req.body;
-        const subscriber = await db.Subscriber.findOne({ where: { email } });
+        const subscriber = await db.subscriber.findOne({ where: { email } });
 
         if (!subscriber) {
             return res.status(404).json({ message: 'Subscriber not found' });
@@ -96,7 +96,7 @@ exports.updateSubscriberStatus = async (req, res) => {
                 subscribed_at: new Date()
             });
         } else {
-            const lastSubscription = await db.SubscriptionHistory.findOne({
+            const lastSubscription = await db.subscription_history.findOne({
                 where: { subscriber_id: subscriber.subscriber_id },
                 order: [['subscribed_at', 'DESC']]
             });
@@ -138,7 +138,7 @@ const addDurations = (duration1, duration2) => {
 };
 exports.getSubscribers = async (req, res) => {
     try {
-        const subscribers = await db.Subscriber.findAll();
+        const subscribers = await db.subscriber.findAll();
         res.status(200).json(subscribers);
     } catch (err) {
         console.error('Error getting subscribers:', err);

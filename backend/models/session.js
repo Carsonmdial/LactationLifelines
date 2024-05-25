@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Session = sequelize.define('Session', {
+  const session = sequelize.define('session', {
     session_id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -31,7 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: true,
     },
-  });
+  }, {
+    timestamps: false  // Disable timestamps
+});
 
-  return Session;
+  return session;
 };

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const SubscriptionHistory = sequelize.define('SubscriptionHistory', {
+    const subscription_history = sequelize.define('subscription_history', {
       history_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Subscribers',
+          model: 'subscribers',
           key: 'subscriber_id',
         },
         onDelete: 'CASCADE',
@@ -27,8 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,  // Storing as ISO 8601 duration string
         allowNull: true,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return SubscriptionHistory;
+    return subscription_history;
   };
   

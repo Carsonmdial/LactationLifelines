@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const UserEngagement = sequelize.define('UserEngagement', {
+    const user_engagement = sequelize.define('user_engagement', {
       engagement_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -21,8 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return UserEngagement;
+    return user_engagement;
   };
   

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Resource = sequelize.define('Resource', {
+    const resource = sequelize.define('resource', {
       resource_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Owners',
+          model: 'owners',
           key: 'owner_id',
         },
         onDelete: 'CASCADE',
@@ -35,8 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return Resource;
+    return resource;
   };
   

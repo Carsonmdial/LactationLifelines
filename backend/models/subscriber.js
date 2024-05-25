@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Subscriber = sequelize.define('Subscriber', {
+    const subscriber = sequelize.define('subscriber', {
       subscriber_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -25,8 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: true,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return Subscriber;
+    return subscriber;
   };
   

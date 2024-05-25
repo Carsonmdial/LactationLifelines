@@ -35,14 +35,10 @@ const subscriberRoutes = require('./routes/subscribers');
 const engagementRoutes = require('./routes/engagement');
 
 // Use routes
-app.use('/api/resources', resourceRoutes);
+app.use('/api/resources', auth, resourceRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/subscribers', [
-    body('email').isEmail().withMessage('Invalid email address'),
-    validateRequest,
-    subscriberRoutes
-]);
-app.use('/api/engagement', engagementRoutes);
+app.use('/api/subscribers', subscriberRoutes);
+app.use('/api/engagement', auth, engagementRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World from Express with Sequelize!');

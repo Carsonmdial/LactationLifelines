@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const PageView = sequelize.define('PageView', {
+    const page_view = sequelize.define('page_view', {
       view_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Sessions',
+          model: 'sessions',
           key: 'session_id',
         },
         onDelete: 'CASCADE',
@@ -31,8 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return PageView;
+    return page_view;
   };
   

@@ -17,16 +17,16 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.Owner = require('./owner')(sequelize, DataTypes);
-db.Resource = require('./resource')(sequelize, DataTypes);
-db.Subscriber = require('./subscriber')(sequelize, DataTypes);
-db.Session = require('./session')(sequelize, DataTypes);
-db.PageView = require('./page_view')(sequelize, DataTypes);
-db.ClickEvent = require('./click_event')(sequelize, DataTypes);
-db.SubscriptionHistory = require('./subscription_history')(sequelize, DataTypes);
-db.EmailEngagement = require('./email_engagement')(sequelize, DataTypes);
-db.UserEngagement = require('./user_engagement')(sequelize, DataTypes);
-db.Feedback = require('./feedback')(sequelize, DataTypes);
-db.BugReport = require('./bug_report')(sequelize, DataTypes);
+db.owner = require('./owner')(sequelize, DataTypes);
+db.resource = require('./resource')(sequelize, DataTypes);
+db.subscriber = require('./subscriber')(sequelize, DataTypes);
+db.session = require('./session')(sequelize, DataTypes);
+db.page_view = require('./page_view')(sequelize, DataTypes);
+db.click_event = require('./click_event')(sequelize, DataTypes);
+db.subscription_history = require('./subscription_history')(sequelize, DataTypes);
+db.email_engagement = require('./email_engagement')(sequelize, DataTypes);
+db.user_engagement = require('./user_engagement')(sequelize, DataTypes);
+db.feedback = require('./feedback')(sequelize, DataTypes);
+db.bug_report = require('./bug_report')(sequelize, DataTypes);
 
 module.exports = db;

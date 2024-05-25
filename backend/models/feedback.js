@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Feedback = sequelize.define('Feedback', {
+    const feedback = sequelize.define('feedback', {
       feedback_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -18,8 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return Feedback;
+    return feedback;
   };
   

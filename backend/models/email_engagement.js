@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const EmailEngagement = sequelize.define('EmailEngagement', {
+    const email_engagement = sequelize.define('email_engagement', {
       engagement_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Subscribers',
+          model: 'subscribers',
           key: 'subscriber_id',
         },
         onDelete: 'CASCADE',
@@ -32,8 +32,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL(5, 2),
         allowNull: true,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return EmailEngagement;
+    return email_engagement;
   };
   

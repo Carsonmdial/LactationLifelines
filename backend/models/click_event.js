@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const ClickEvent = sequelize.define('ClickEvent', {
+    const click_event = sequelize.define('click_event', {
       click_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Sessions',
+          model: 'sessions',
           key: 'session_id',
         },
         onDelete: 'CASCADE',
@@ -31,8 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
-    });
+    }, {
+      timestamps: false  // Disable timestamps
+  });
   
-    return ClickEvent;
+    return click_event;
   };
   
